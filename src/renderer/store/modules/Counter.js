@@ -11,7 +11,7 @@ function xmlrpcCall (model, method, args, kwargs, callback) {
     xmlrpc.createClient(host + '/xmlrpc/2/common').methodCall('authenticate', [
       db, user, pwd, {}
     ], function (err, res) {
-      if (err) return False
+      if (err) return false
       uid = res
       console.log('User: ' + uid)
     })
@@ -20,7 +20,7 @@ function xmlrpcCall (model, method, args, kwargs, callback) {
     xmlrpc.createClient(host + '/xmlrpc/2/object').methodCall('execute_kw', [
       db, uid, pwd, model, method, args, kwargs
     ], function (err, res) {
-      if (err) return False
+      if (err) return false
       callback(res)
     })
   }
@@ -28,7 +28,7 @@ function xmlrpcCall (model, method, args, kwargs, callback) {
 
 const state = {
   main: 0,
-  name: '',
+  name: ''
 }
 
 const mutations = {
@@ -45,7 +45,6 @@ const mutations = {
 
 const actions = {
   someAsyncTask ({ commit, state }) {
-    var odoo = xmlrpc.createClient('http://demo.odoo.com/start')
     xmlrpcCall('res.users', 'read', [[state.main], ['name']], {}, function (res) {
       console.log(res)
       commit('SET_NAME', res[0].name)
