@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'to-doo',
+      name: 'home',
       component: require('@/components/ToDoo').default
     },
     {
